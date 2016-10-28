@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Faonni
+ *  
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade module to newer
+ * versions in the future.
+ * 
+ * @package     Faonni_FPC
+ * @copyright   Copyright (c) 2015 Karliuka Vitalii(karliuka.vitalii@gmail.com) 
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Faonni_FPC>
+            <version>0.1.2</version>
+        </Faonni_FPC>
+    </modules>
+    <global>
+        <cache>
+            <types>
+                <faonni_fpc translate="label,description" module="faonni_fpc">
+                    <label>Page Cache</label>
+                    <description>Full page caching.</description>
+                    <tags>FPC</tags>
+                </faonni_fpc>
+            </types>
+        </cache>
+        <helpers>
+            <faonni_fpc>
+                <class>Faonni_FPC_Helper</class>
+            </faonni_fpc>
+        </helpers>
+        <models>
+            <faonni_fpc>
+                <class>Faonni_FPC_Model</class>
+            </faonni_fpc>
+        </models>
+		<faonni_fpc>
+			<frontend_options>
+				<cache_actions>
+					<cms_index_index/>
+					<cms_page_view/>
+					<catalog_product_view/>
+					<catalog_category_view/>
+					<customer_account_login/>
+					<contacts_index_index/>
+				</cache_actions>
+				<dynamic_blocks>
+					<top.links/>
+					<messages/>
+					<global_messages/>
+					<global_notices/>
+					<right.reports.product.viewed/>
+					<cart_sidebar/>
+					<catalog.compare.sidebar/>
+					<wishlist_sidebar/>
+					<welcome/>
+					<minicart_head/>
+					<right.poll/>
+				</dynamic_blocks>
+			</frontend_options>
+        </faonni_fpc>		
+    </global>
+    <frontend>
+        <events>
+            <http_response_send_before>
+                <observers>
+                    <faonni_fpc_http_response_send_before>
+                        <class>faonni_fpc/observer</class>
+                        <type>singleton</type>
+                        <method>cacheResponse</method>
+                    </faonni_fpc_http_response_send_before>
+                </observers>
+            </http_response_send_before>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <faonni_fpc_block_to_html_after>
+                        <class>faonni_fpc/observer</class>
+                        <type>singleton</type>
+                        <method>cacheBlock</method>
+                    </faonni_fpc_block_to_html_after>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+    <adminhtml>
+        <events>
+            <clean_media_cache_after>
+                <observers>
+                    <faonni_fpc>
+                        <class>faonni_fpc/observer</class>
+                        <method>cleanCache</method>
+                    </faonni_fpc>
+                </observers>
+            </clean_media_cache_after>
+            <clean_catalog_images_cache_after>
+                <observers>
+                    <faonni_fpc>
+                        <class>faonni_fpc/observer</class>
+                        <method>cleanCache</method>
+                    </faonni_fpc>
+                </observers>
+            </clean_catalog_images_cache_after>
+            <adminhtml_cache_refresh_type>
+                <observers>
+                    <faonni_fpc>
+                        <class>faonni_fpc/observer</class>
+                        <method>cleanCache</method>
+                    </faonni_fpc>
+                </observers>
+            </adminhtml_cache_refresh_type>
+            <adminhtml_cache_flush_system>
+                <observers>
+                    <faonni_fpc>
+                        <class>faonni_fpc/observer</class>
+                        <method>cleanCache</method>
+                    </faonni_fpc>
+                </observers>
+            </adminhtml_cache_flush_system>
+            <adminhtml_cache_flush_all>
+                <observers>
+                    <faonni_fpc>
+                        <class>faonni_fpc/observer</class>
+                        <method>cleanCache</method>
+                    </faonni_fpc>
+                </observers>
+            </adminhtml_cache_flush_all>
+        </events>
+    </adminhtml>	
+</config>
