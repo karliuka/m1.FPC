@@ -20,7 +20,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Faonni_FPC_Model_Session 
-	`extends Varien_Object
+	extends Varien_Object
 {
     /**
      * Constructor
