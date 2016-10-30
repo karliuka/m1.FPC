@@ -83,7 +83,7 @@ class Faonni_FPC_Model_Cache
      */
     static public function getUrlKey(Mage_Core_Controller_Request_Http $request)
     {
-        return md5($request->getRequestUri());
+        return md5($request->getCookie('store', 'default') . $request->getRequestUri());
     }
 	
 	/**
